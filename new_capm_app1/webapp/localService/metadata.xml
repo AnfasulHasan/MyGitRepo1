@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Books" EntityType="CatalogService.Books"/>
+                <EntitySet Name="Products" EntityType="CatalogService.Products"/>
+                <EntitySet Name="Suppliers" EntityType="CatalogService.Suppliers"/>
+            </EntityContainer>
+            <EntityType Name="Books">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Category" Type="Edm.String"/>
+                <Property Name="UnitPrice" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Products">
+                <Key>
+                    <PropertyRef Name="ProductID"/>
+                </Key>
+                <Property Name="ProductID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ProductName" Type="Edm.String"/>
+                <Property Name="ProductCategory" Type="Edm.String"/>
+                <Property Name="ProductUnitPrice" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Suppliers">
+                <Key>
+                    <PropertyRef Name="SupplierID"/>
+                </Key>
+                <Property Name="SupplierID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="SupplierName" Type="Edm.String"/>
+                <Property Name="SupplierCategory" Type="Edm.String"/>
+                <Property Name="SupplierUnitPrice" Type="Edm.String"/>
+            </EntityType>
+            <Annotations Target="CatalogService.EntityContainer/Books">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.Products">
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="{i18n>Cat.TypeName}"/>
+                            <PropertyValue Property="TypeNamePlural" String="{i18n>Cat.TypeNamePlural}"/>
+                                <PropertyValue Property="Title">
+                                    <Record Type="UI.DataField">
+                                        <PropertyValue Property="Value" Path="title"/>
+                                    </Record>
+                                </PropertyValue>
+                            </Record>
+                        </Annotation>
+                        <Annotation Term="UI.SelectionFields">
+                            <Collection>
+                                <PropertyPath>identifier</PropertyPath>
+                                <PropertyPath>title</PropertyPath>
+                                <PropertyPath>availability</PropertyPath>
+                                <PropertyPath>price</PropertyPath>
+                            </Collection>
+                        </Annotation>
+                        <Annotation Term="UI.LineItem">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="identifier"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="title"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="availability"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="price"/>
+                                </Record>
+                            </Collection>
+                        </Annotation>
+                        <Annotation Term="UI.HeaderFacets">
+                            <Collection>
+                                <Record Type="UI.ReferenceFacet">
+                                    <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#ProductDetail"/>
+                                    <PropertyValue Property="Label" String="{i18n>Cat.HeaderFacetDetails}"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#SupplierDetail"/>
+                                        <PropertyValue Property="Label" String="{i18n>Cat.HeaderFacetSupplier}"/>
+                                        </Record>
+                                        <Record Type="UI.ReferenceFacet">
+                                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Price"/>
+                                        </Record>
+                                    </Collection>
+                                </Annotation>
+                                <Annotation Term="UI.Facets">
+                                    <Collection>
+                                        <Record Type="UI.CollectionFacet">
+                                            <PropertyValue Property="Label" String="{i18n>Cat.FacetProductInformation}"/>
+                                                <PropertyValue Property="Facets">
+                                                    <Collection>
+                                                        <Record Type="UI.ReferenceFacet">
+                                                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Description"/>
+                                                            <PropertyValue Property="Label" String="{i18n>Cat.FacetSectionDescription}"/>
+                                                            </Record>
+                                                        </Collection>
+                                                    </PropertyValue>
+                                                </Record>
+                                            </Collection>
+                                        </Annotation>
+                                        <Annotation Term="UI.DataPoint" Qualifier="Price">
+                                            <Record Type="UI.DataPointType">
+                                                <PropertyValue Property="Value" Path="price"/>
+                                                <PropertyValue Property="Title" String="{i18n>Cat.HeaderPrice}"/>
+                                                </Record>
+                                            </Annotation>
+                                            <Annotation Term="UI.FieldGroup" Qualifier="Description">
+                                                <Record Type="UI.FieldGroupType">
+                                                    <PropertyValue Property="Data">
+                                                        <Collection>
+                                                            <Record Type="UI.DataField">
+                                                                <PropertyValue Property="Value" Path="description"/>
+                                                            </Record>
+                                                        </Collection>
+                                                    </PropertyValue>
+                                                </Record>
+                                            </Annotation>
+                                            <Annotation Term="UI.FieldGroup" Qualifier="ProductDetail">
+                                                <Record Type="UI.FieldGroupType">
+                                                    <PropertyValue Property="Data">
+                                                        <Collection>
+                                                            <Record Type="UI.DataField">
+                                                                <PropertyValue Property="Value" Path="identifier"/>
+                                                            </Record>
+                                                            <Record Type="UI.DataField">
+                                                                <PropertyValue Property="Value" Path="availability"/>
+                                                            </Record>
+                                                        </Collection>
+                                                    </PropertyValue>
+                                                </Record>
+                                            </Annotation>
+                                            <Annotation Term="UI.FieldGroup" Qualifier="SupplierDetail">
+                                                <Record Type="UI.FieldGroupType">
+                                                    <PropertyValue Property="Data">
+                                                        <Collection>
+                                                            <Record Type="UI.DataField">
+                                                                <PropertyValue Property="Value" Path="supplier/identifier"/>
+                                                            </Record>
+                                                            <Record Type="UI.DataField">
+                                                                <PropertyValue Property="Value" Path="supplier/postCode"/>
+                                                            </Record>
+                                                            <Record Type="UI.DataField">
+                                                                <PropertyValue Property="Value" Path="supplier/phone"/>
+                                                            </Record>
+                                                        </Collection>
+                                                    </PropertyValue>
+                                                </Record>
+                                            </Annotation>
+                                        </Annotations>
+                                        <Annotations Target="CatalogService.EntityContainer/Products">
+                                            <Annotation Term="Capabilities.DeleteRestrictions">
+                                                <Record Type="Capabilities.DeleteRestrictionsType">
+                                                    <PropertyValue Property="Deletable" Bool="false"/>
+                                                </Record>
+                                            </Annotation>
+                                            <Annotation Term="Capabilities.InsertRestrictions">
+                                                <Record Type="Capabilities.InsertRestrictionsType">
+                                                    <PropertyValue Property="Insertable" Bool="false"/>
+                                                </Record>
+                                            </Annotation>
+                                            <Annotation Term="Capabilities.UpdateRestrictions">
+                                                <Record Type="Capabilities.UpdateRestrictionsType">
+                                                    <PropertyValue Property="Updatable" Bool="false"/>
+                                                </Record>
+                                            </Annotation>
+                                        </Annotations>
+                                        <Annotations Target="CatalogService.EntityContainer/Suppliers">
+                                            <Annotation Term="Capabilities.DeleteRestrictions">
+                                                <Record Type="Capabilities.DeleteRestrictionsType">
+                                                    <PropertyValue Property="Deletable" Bool="false"/>
+                                                </Record>
+                                            </Annotation>
+                                            <Annotation Term="Capabilities.InsertRestrictions">
+                                                <Record Type="Capabilities.InsertRestrictionsType">
+                                                    <PropertyValue Property="Insertable" Bool="false"/>
+                                                </Record>
+                                            </Annotation>
+                                            <Annotation Term="Capabilities.UpdateRestrictions">
+                                                <Record Type="Capabilities.UpdateRestrictionsType">
+                                                    <PropertyValue Property="Updatable" Bool="false"/>
+                                                </Record>
+                                            </Annotation>
+                                        </Annotations>
+                                    </Schema>
+                                </edmx:DataServices>
+                            </edmx:Edmx>
