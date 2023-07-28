@@ -1,18 +1,70 @@
 <mvc:View   controllerName="newcapmapp1.controller.View1"
             xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-            xmlns="sap.m">
-    <Page id="page" title="{i18n>title}" titleAlignment="Center">
-        <content>
-            <!-- <Button text="NewButton"></Button> -->
-            <List items="{odata>/Books}" >
-                <StandardListItem 
-                    title="{odata>Name}" 
-                    description="{odata>ID}"  
-                    info="{odata>Profile}"
-                    counter="{odata>UnitPrice}"
-                    infoState="Success">
-                </StandardListItem>
-            </List>
+            xmlns="sap.m" xmlns:form="sap.ui.layout.form"
+            xmlns:core="sap.ui.core">    
+    <Page id="idmaster" title="{i18n>title}" titleAlignment="Center">
+        <content>                    
+            <Table headerText="Table Data with Books" items="{odata>/Books}" id="table0" mode="SingleSelectLeft" itemPress="navTo"> 
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <ToolbarSpacer />                                       
+                            <Button icon="sap-icon://add" tooltip="Create" visible="true" press="onOpenAddDialog" />
+                            <Button id="deleteButton" icon="sap-icon://delete" tooltip="Delete" visible="false" press="onDelete" />                                       
+                            <Button id="saveButton" text="Save" type="Emphasized" visible="false" enabled="true" press="onSave" />
+                            <Button id="editModeButton" visible="true" icon="sap-icon://edit" tooltip="Edit" press="onEditMode" />                                       
+                        </content>
+                        <dependents>
+                            <Dialog id="OpenDialog" title="Create Employee Record">
+                                <buttons>
+                                    <Button id="confirmCreate" text="Create" press=".onCreate" type="Emphasized" />
+                                    <Button id="cancelCreate" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                </buttons>
+                                <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                    <form:content>
+                                        <Label text="Enter ID" required="true" />
+                                        <Input id="idId" change="onNameChange" />
+                                        <Label text="Enter Name" />
+                                        <Input id="idName"  />                                                   
+                                        <Label text="Enter Profile" required="true" />
+                                        <Input id="idProfile" change="onNameChange" />
+                                        <Label text="Enter UnitPrice" />
+                                        <Input id="idUnitPrice"  />                                                   
+                                    </form:content>
+                                </form:SimpleForm>
+                            </Dialog>
+                        </dependents>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Label text="Id" design="Bold"/>
+                    </Column>
+                    <Column>
+                        <Label text="Name" design="Bold"/>
+                    </Column>                    
+                    <Column>
+                        <Label text="Profile" design="Bold"/>
+                    </Column>                    
+                    <Column>
+                        <Label text="UnitPrice" design="Bold" />
+                    </Column>                    
+                </columns>
+                <items>
+                    <ColumnListItem  id="item0" type="Navigation"  press="navTo">
+                        <cells>
+                            <Text id="id1" text="{odata>ID}"/>
+                            <Text id="id2" text="{odata>Name}"/>            
+                            <Text id="id3" text="{odata>Profile}"/>            
+                            <Text id="id4" text="{odata>UnitPrice}"/>            
+                            <Button id="id6" icon="sap-icon://edit" press="onSelect" />
+                        </cells>
+                    </ColumnListItem>
+                </items>                           
+            </Table>
+            <!-- <List items="{odata>/Products}" headerText="List Data with Products">
+                <StandardListItem title="{odata>ProductName}"></StandardListItem>
+            </List> -->
         </content>
-    </Page>
+    </Page>   
 </mvc:View>

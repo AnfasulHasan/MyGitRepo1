@@ -1,10 +1,16 @@
-<mvc:View controllerName="newcapmapp1.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+<mvc:View   controllerName="newcapmapp1.controller.View1"
+            xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+            xmlns="sap.m">
+    <Page id="page" title="{i18n>title}" titleAlignment="Center">
         <content>
-            <List items="{odata>/Books}" >
-                <StandardListItem title="{odata>ID}" description="{odata>Name}">
+            <!-- <Button text="NewButton"></Button> -->
+            <List items="{/Books}" growing="true" growingThreshold="5">
+                <StandardListItem 
+                    title="{Name}" 
+                    description="{ID}"  
+                    info="{Profile}"
+                    counter="{UnitPrice}"
+                    infoState="Success">
                 </StandardListItem>
             </List>
         </content>

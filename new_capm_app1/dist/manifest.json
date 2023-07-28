@@ -69,7 +69,7 @@
                     "bundleName": "newcapmapp1.i18n.i18n"
                 }
             },
-            "odata": {
+            "": {
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {

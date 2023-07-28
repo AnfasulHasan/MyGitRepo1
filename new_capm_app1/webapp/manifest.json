@@ -69,15 +69,18 @@
           "bundleName": "newcapmapp1.i18n.i18n"
         }
       },
-      "odata": {
+      "odata": {        
+        "type": "sap.ui.model.odata.v4.ODataModel",
         "dataSource": "mainService",
         "preload": true,
         "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true
-        }
+            "synchronizationMode": "None",
+            "operationMode": "Server",
+            "autoExpandSelect": true,
+            "earlyRequests": true,
+            "groupId": "$auto"
+        
+    }
       }
     },
     "resources": {
@@ -93,26 +96,35 @@
         "viewType": "XML",
         "async": true,
         "viewPath": "newcapmapp1.view",
-        "controlAggregation": "pages",
         "controlId": "app",
-        "clearControlAggregation": false
+        "controlAggregation": "pages"
       },
       "routes": [
         {
           "name": "RouteView1",
           "pattern": ":?query:",
-          "target": [
-            "TargetView1"
-          ]
+          "target": ["TargetView1" ]
+        },
+        {
+          "name": "RouteView2",
+          "pattern": "Page2/{tripTest}",
+          "target": [ "TargetView2" ]
         }
       ],
       "targets": {
         "TargetView1": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
+          "ControlAggregation": false,
           "viewId": "View1",
           "viewName": "View1"
+        },
+        "TargetView2": {
+          "viewType": "XML",
+          "transition": "slide",
+          "ControlAggregation": false,
+          "viewId": "View2",
+          "viewName": "View2"
         }
       }
     },
