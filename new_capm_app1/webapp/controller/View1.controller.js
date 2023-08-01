@@ -36,7 +36,7 @@ sap.ui.define([
                         "ID" : oId2,
                         "Name": this.byId("idName").getValue(),
                         "Profile": this.byId("idProfile").getValue(),
-                        "UnitPrice": this.byId("idUnitPrice").getValue()                         
+                        "ew": this.byId("idUnitPrice").getValue()                         
                     });
                     this.getOwnerComponent().getModel("odata").submitBatch()
                     // oContext.created()
