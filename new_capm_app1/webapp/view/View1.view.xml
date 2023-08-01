@@ -4,14 +4,13 @@
             xmlns:core="sap.ui.core">    
     <Page id="idmaster" title="{i18n>title}" titleAlignment="Center">
         <content>                    
-            <Table headerText="Table Data with Books" items="{odata>/Books}" id="table0" mode="SingleSelectLeft" itemPress="navTo"> 
+            <Table headerText="Table Data with Books" items="{odata>/Books}" id="idTable" mode="SingleSelectLeft" itemPress="navTo"> 
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>
                             <ToolbarSpacer />                                       
                             <Button icon="sap-icon://add" tooltip="Create" visible="true" press="onOpenAddDialog" />
-                            <Button id="deleteButton" icon="sap-icon://delete" tooltip="Delete" visible="false" press="onDelete" />                                       
-                            <Button id="saveButton" text="Save" type="Emphasized" visible="false" enabled="true" press="onSave" />
+                            <Button id="deleteButton" icon="sap-icon://delete" tooltip="Delete" visible="true" press="onDelete" />                                       
                             <Button id="editModeButton" visible="true" icon="sap-icon://edit" tooltip="Edit" press="onEditMode" />                                       
                         </content>
                         <dependents>
@@ -61,10 +60,7 @@
                         </cells>
                     </ColumnListItem>
                 </items>                           
-            </Table>
-            <!-- <List items="{odata>/Products}" headerText="List Data with Products">
-                <StandardListItem title="{odata>ProductName}"></StandardListItem>
-            </List> -->
+            </Table>            
         </content>
     </Page>   
 </mvc:View>

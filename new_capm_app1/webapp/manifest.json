@@ -78,7 +78,7 @@
             "operationMode": "Server",
             "autoExpandSelect": true,
             "earlyRequests": true,
-            "groupId": "$auto"
+            "groupId": "$direct"
         
     }
       }
@@ -97,32 +97,32 @@
         "async": true,
         "viewPath": "newcapmapp1.view",
         "controlId": "app",
-        "controlAggregation": "pages"
+        "controlAggregation": "detailPages"
       },
       "routes": [
         {
           "name": "RouteView1",
           "pattern": ":?query:",
-          "target": ["TargetView1" ]
+          "target": ["TargetView1", "TargetView2" ]
         },
         {
           "name": "RouteView2",
-          "pattern": "Page2/{tripTest}",
-          "target": [ "TargetView2" ]
+          "pattern": "Page2/{campApp}",
+          "target": [ "TargetView2" , "TargetView1"]
         }
       ],
       "targets": {
         "TargetView1": {
           "viewType": "XML",
           "transition": "slide",
-          "ControlAggregation": false,
+          "controlAggregation": "masterPages",
           "viewId": "View1",
           "viewName": "View1"
         },
         "TargetView2": {
           "viewType": "XML",
           "transition": "slide",
-          "ControlAggregation": false,
+          "controlAggregation": "detailPages",
           "viewId": "View2",
           "viewName": "View2"
         }

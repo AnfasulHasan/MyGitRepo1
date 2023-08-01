@@ -14,15 +14,12 @@ sap.ui.define([
             },
             _onObjectMatched: function (oEvent) {
                 this.getView().bindElement({
-                    path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").tripTest),
+                    path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").campApp),
                     model: "odata"
                 });
             },
-            backTo: function(){
-                this.getOwnerComponent().getRouter().navTo("RouteView1");
-            },
-            // editreco: function(){
-                
+            // backTo: function(){
+            //     this.getOwnerComponent().getRouter().navTo("RouteView1");
             // }
         });
     });

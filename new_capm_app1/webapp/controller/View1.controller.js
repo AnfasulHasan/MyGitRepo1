@@ -10,13 +10,13 @@ sap.ui.define([
 
         return Controller.extend("newcapmapp1.controller.View1", {
             onInit: function () {
-                this._oTable = this.byId("table0");
+                this._oTable = this.byId("idTable");
             },
             navTo: function(oEvent){
                 var oItem = oEvent.getSource();
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.navTo("RouteView2", {
-                    tripTest: window.encodeURIComponent(oItem.getBindingContext("odata").getPath().substr(1))
+                    campApp: window.encodeURIComponent(oItem.getBindingContext("odata").getPath().substr(1))
                 });
             },
             onOpenAddDialog: function () {
@@ -26,37 +26,40 @@ sap.ui.define([
                 oEvent.getSource().getParent().close();
             },
             onCreate: function () {
-                var oidId = this.getView().byId("idId").getValue();
-                if (oidId !== "") {
+                var oId = this.getView().byId("idId").getValue();
+                var oId2 = parseInt(oId);
+
+                if (oId2 !== "") {
                     const oList = this._oTable;
                     const oBinding = oList.getBinding("items");
                     const oContext = oBinding.create({
-                        "ID": this.byId("idId").getValue(),
+                        "ID" : oId2,
                         "Name": this.byId("idName").getValue(),
                         "Profile": this.byId("idProfile").getValue(),
-                        "UnitPrice": this.byId("idUnitPrice").getValue()                                 
+                        "UnitPrice": this.byId("idUnitPrice").getValue()                         
                     });
-                    oContext.created()
+                    this.getOwnerComponent().getModel("odata").submitBatch()
+                    // oContext.created()
                     .then(()=>{
                         // that._focusItem(oList, oContext);
                         this.getView().byId("OpenDialog").close();
                     });  
+                    MessageToast.show("Record SuccessFully Created .");
                 }
                 else {
-                    MessageToast.show("Record cannot be blank");
+                    MessageToast.show("Record cannot be blank !!");
                 }
             }, 
             onEditMode: function(){
                 this.byId("editModeButton").setVisible(true);
-                this.byId("saveButton").setVisible(true);
                 this.byId("deleteButton").setVisible(true);
                 // this.rebindTable(this.oEditableTemplate, "Edit");
            },
            onDelete: function(){
 
-            var oSelected = this.byId("table0").getSelectedItem();
+            var oSelected = this.byId("idTable").getSelectedItem();
             if(oSelected){
-                var oSalesOrder = oSelected.getBindingContext("odata").getObject().soNumber;
+                var oSalesOrder = oSelected.getBindingContext("odata").getObject().ID;
             
                 oSelected.getBindingContext("odata").delete().then(function () {
                     MessageToast.show(oSalesOrder + " SuccessFully Deleted");
@@ -65,8 +68,7 @@ sap.ui.define([
                 });
             } else {
                 MessageToast.show("Please Select a Row to Delete");
-            }
-            
+            }            
             },          
         });
     });
