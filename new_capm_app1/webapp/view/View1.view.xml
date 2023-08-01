@@ -2,9 +2,9 @@
             xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
             xmlns="sap.m" xmlns:form="sap.ui.layout.form"
             xmlns:core="sap.ui.core">    
-    <Page id="idmaster" title="{i18n>title}" titleAlignment="Center">
+    <Page id="idmaster" title="{i18n>title}" titleAlignment="Center" >
         <content>                    
-            <Table headerText="Table Data with Books" items="{odata>/Books}" id="idTable" mode="SingleSelectLeft" itemPress="navTo"> 
+            <Table headerText="Table Data with Books" growing="true" growingThreshold="5" items="{odata>/Books}" id="idTable" mode="SingleSelectLeft" itemPress="navTo"> 
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>

@@ -10,7 +10,7 @@
 
                     <form:SimpleForm editable="true" id="idform">
                         <form:title>
-                            <core:Title text="Employee Record" icon="sap-icon://customer"></core:Title>
+                            <core:Title text="Employee Record" icon="sap-icon://customer" ></core:Title>
                         </form:title>
                         <Label text="Enter Emp ID"  design="Bold"></Label>
                         <Input width="15%" id="Empid" value="{odata>ID}" editable="false"></Input>                      

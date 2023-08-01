@@ -36,13 +36,14 @@ sap.ui.define([
                         "ID" : oId2,
                         "Name": this.byId("idName").getValue(),
                         "Profile": this.byId("idProfile").getValue(),
-                        "ew": this.byId("idUnitPrice").getValue()                         
+                        "UnitPrice": this.byId("idUnitPrice").getValue()                         
                     });
+                    this.getView().byId("OpenDialog").close();
                     this.getOwnerComponent().getModel("odata").submitBatch()
-                    // oContext.created()
                     .then(()=>{
-                        // that._focusItem(oList, oContext);
                         this.getView().byId("OpenDialog").close();
+                        // oContext.created()
+                        // that._focusItem(oList, oContext);
                     });  
                     MessageToast.show("Record SuccessFully Created .");
                 }
